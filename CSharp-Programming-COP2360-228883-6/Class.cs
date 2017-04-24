@@ -15,24 +15,20 @@ namespace CSharp_Programming_COP2360_228883_6
                 try
                 {
                     var spots = MaximumEnrollment - CurrentEnrollment;
-                    if (spots >= 0)
+                    if (spots < 0)
                         return spots;
-                    else
-                        throw new ClassFilledException("Problem with Course: {0}\nStudents Enrolled: {1}\nMaximum Allowed: {2}\nReport halted!", ClassName);
+                    throw new ClassFilledException(string.Format("Problem with Course: {0}\nStudents Enrolled: {1}\nMaximum Allowed: {2}\nReport halted!", ClassName, CurrentEnrollment, MaximumEnrollment));
                 }
-                catch (ClassFilledException)
+                catch (ClassFilledException e)
                 {
-
+                    Console.WriteLine(e.Message);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
-                    throw;
+                    Console.WriteLine(e.Message);
                 }
             }
-            private set
-            {
-            }
+            private set { AvailableSpots = AvailableSpots; }
         }
         public bool ClassFull
         {
